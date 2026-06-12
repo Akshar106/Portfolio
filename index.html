@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary meta tags (update with your real details later) -->
+    <title>Your Name — ML Engineer & Data Scientist</title>
+    <meta
+      name="description"
+      content="Portfolio of an ML Engineer & Data Scientist specializing in machine learning, deep learning, and data-driven products."
+    />
+    <meta name="author" content="Your Name" />
+
+    <!-- Open Graph (controls link previews when shared) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Your Name — ML Engineer & Data Scientist" />
+    <meta
+      property="og:description"
+      content="Portfolio of an ML Engineer & Data Scientist."
+    />
+
+    <!-- Set theme class before paint to avoid a flash of the wrong theme -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var isDark = stored ? stored === 'dark' : prefersDark || true;
+          document.documentElement.classList.toggle('dark', isDark);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
