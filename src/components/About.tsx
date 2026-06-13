@@ -1,5 +1,6 @@
 import Reveal from './ui/Reveal';
 import SectionHeading from './ui/SectionHeading';
+import CountUp from './ui/CountUp';
 import { about } from '../data/portfolio';
 
 export default function About() {
@@ -21,7 +22,7 @@ export default function About() {
             {about.stats.map((stat) => (
               <div key={stat.label} className="card p-5">
                 <div className="font-display text-3xl font-bold text-gradient">
-                  {stat.value}
+                  <CountUp value={stat.value} />
                 </div>
                 <div className="mt-1 text-sm text-slate-500 dark:text-slate-400">
                   {stat.label}

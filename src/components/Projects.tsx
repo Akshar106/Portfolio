@@ -2,6 +2,7 @@ import { FaGithub } from 'react-icons/fa';
 import { FiExternalLink } from 'react-icons/fi';
 import Reveal from './ui/Reveal';
 import SectionHeading from './ui/SectionHeading';
+import Tilt from './ui/Tilt';
 import { projects } from '../data/portfolio';
 
 export default function Projects() {
@@ -19,8 +20,9 @@ export default function Projects() {
 
         <div className="grid gap-6 md:grid-cols-2">
           {projects.map((project, i) => (
-            <Reveal key={project.title} delay={i * 0.06}>
-              <article className="card group flex h-full flex-col p-6">
+            <Reveal key={project.title} delay={i * 0.06} className="h-full">
+              <Tilt className="h-full">
+                <article className="card group flex h-full flex-col p-6">
                 <div className="mb-4 flex items-center justify-between">
                   {/* Folder-style icon */}
                   <svg
@@ -81,7 +83,8 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
-              </article>
+                </article>
+              </Tilt>
             </Reveal>
           ))}
         </div>

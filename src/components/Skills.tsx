@@ -1,5 +1,6 @@
 import Reveal from './ui/Reveal';
 import SectionHeading from './ui/SectionHeading';
+import LogoMarquee from './LogoMarquee';
 import { skills } from '../data/portfolio';
 
 export default function Skills() {
@@ -36,6 +37,11 @@ export default function Skills() {
             </Reveal>
           ))}
         </div>
+      </div>
+
+      {/* Infinite tech-logo marquee (full-bleed) */}
+      <div className="mt-14">
+        <LogoMarquee />
       </div>
     </section>
   );

@@ -1,9 +1,20 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { FiArrowRight, FiDownload, FiUser } from 'react-icons/fi';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 import { profile, socials } from '../data/portfolio';
+import NeuralBackground from './ui/NeuralBackground';
+
+// Staggered entrance for the hero text content.
+const container: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+};
+const item: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+};
 
 /** Simple typewriter that cycles through the role strings. */
 function useTypewriter(words: string[], speed = 90, pause = 1400) {
@@ -46,10 +57,11 @@ export default function Hero() {
       id="home"
       className="relative flex min-h-screen items-center overflow-hidden pt-16"
     >
-      {/* Decorative background glows */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-accent-500/20 blur-3xl dark:bg-accent-600/20" />
-        <div className="absolute right-1/4 top-1/3 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl dark:bg-cyan-500/10" />
+      {/* Decorative background: animated aurora glows, grid, and neural net */}
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-24 left-1/4 h-72 w-72 animate-aurora rounded-full bg-accent-500/25 blur-3xl dark:bg-accent-600/20" />
+        <div className="absolute right-1/4 top-1/3 h-80 w-80 animate-aurora rounded-full bg-cyan-400/20 blur-3xl [animation-delay:-5s] dark:bg-cyan-500/10" />
+        <div className="absolute bottom-0 left-1/2 h-72 w-72 animate-aurora rounded-full bg-indigo-500/20 blur-3xl [animation-delay:-9s] dark:bg-indigo-600/10" />
         <div
           className="absolute inset-0 opacity-[0.04] dark:opacity-[0.06]"
           style={{
@@ -59,38 +71,48 @@ export default function Hero() {
           }}
         />
       </div>
+      {/* Neural-network canvas (interactive, behind content) */}
+      <NeuralBackground className="absolute inset-0 -z-10 h-full w-full" />
 
       <div className="container-x grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-        >
+        <motion.div variants={container} initial="hidden" animate="show">
           {profile.available && (
-            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+            <motion.span
+              variants={item}
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-600 dark:text-emerald-400"
+            >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
               Open to opportunities
-            </span>
+            </motion.span>
           )}
 
-          <h1 className="font-display text-4xl font-bold leading-tight text-slate-900 sm:text-6xl dark:text-white">
+          <motion.h1
+            variants={item}
+            className="font-display text-4xl font-bold leading-tight text-slate-900 sm:text-6xl dark:text-white"
+          >
             Hi, I'm <span className="text-gradient">{profile.name}</span>
-          </h1>
+          </motion.h1>
 
-          <div className="mt-4 flex items-center text-2xl font-semibold text-slate-700 sm:text-3xl dark:text-slate-200">
+          <motion.div
+            variants={item}
+            className="mt-4 flex items-center text-2xl font-semibold text-slate-700 sm:text-3xl dark:text-slate-200"
+          >
             <span className="text-gradient">{typed}</span>
             <span className="ml-1 inline-block h-7 w-[3px] animate-pulse bg-accent-500 sm:h-8" />
-          </div>
+          </motion.div>
 
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-400">
+          <motion.p
+            variants={item}
+            className="mt-6 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-400"
+          >
             {profile.tagline}
-          </p>
+          </motion.p>
 
           {/* CTAs */}
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-4">
             <a
               href="#projects"
               className="group inline-flex items-center gap-2 rounded-xl bg-accent-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-accent-600/25 transition-all hover:-translate-y-0.5 hover:bg-accent-500 hover:shadow-accent-500/40"
@@ -105,10 +127,10 @@ export default function Hero() {
               <FiDownload />
               Resume
             </a>
-          </div>
+          </motion.div>
 
           {/* Socials */}
-          <div className="mt-8 flex items-center gap-5">
+          <motion.div variants={item} className="mt-8 flex items-center gap-5">
             {[
               { href: socials.github, icon: FaGithub, label: 'GitHub' },
               { href: socials.linkedin, icon: FaLinkedin, label: 'LinkedIn' },
@@ -125,7 +147,7 @@ export default function Hero() {
                 <Icon size={22} />
               </a>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Photo */}

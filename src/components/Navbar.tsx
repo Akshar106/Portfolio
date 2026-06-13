@@ -16,12 +16,30 @@ export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState('');
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Scroll-spy: highlight the nav link for the section currently in view.
+  useEffect(() => {
+    const sections = NAV_LINKS.map((l) => document.querySelector(l.href)).filter(
+      (el): el is Element => el !== null,
+    );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 },
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
   }, []);
 
   // Prevent body scroll when the mobile menu is open
@@ -51,16 +69,28 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <ul className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-sm font-medium text-slate-600 transition-colors hover:text-accent-500 dark:text-slate-300 dark:hover:text-accent-400"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive = active === link.href;
+            return (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className={`relative text-sm font-medium transition-colors hover:text-accent-500 dark:hover:text-accent-400 ${
+                    isActive
+                      ? 'text-accent-500 dark:text-accent-400'
+                      : 'text-slate-600 dark:text-slate-300'
+                  }`}
+                >
+                  {link.label}
+                  <span
+                    className={`absolute -bottom-1.5 left-0 h-0.5 rounded-full bg-accent-500 transition-all duration-300 dark:bg-accent-400 ${
+                      isActive ? 'w-full' : 'w-0'
+                    }`}
+                  />
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Right controls */}
