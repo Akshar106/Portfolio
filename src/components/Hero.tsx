@@ -74,7 +74,7 @@ export default function Hero() {
       {/* Neural-network canvas (interactive, behind content) */}
       <NeuralBackground className="absolute inset-0 -z-10 h-full w-full" />
 
-      <div className="container-x grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="container-x grid items-center gap-12 lg:grid-cols-[1.3fr_0.7fr]">
         <motion.div variants={container} initial="hidden" animate="show">
           {profile.available && (
             <motion.span
@@ -155,7 +155,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-          className="order-first mx-auto w-full max-w-xs sm:max-w-sm lg:order-none lg:max-w-none"
+          className="order-first mx-auto w-full max-w-[260px] sm:max-w-xs lg:order-none lg:mx-0 lg:ml-auto lg:max-w-[340px]"
         >
           <div className="relative animate-float">
             {/* Soft glow behind the frame */}
