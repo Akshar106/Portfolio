@@ -186,7 +186,7 @@ export default function Hero() {
             {/* Floating accent badge */}
             <div className="absolute -bottom-4 -left-4 hidden rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-xl backdrop-blur sm:block dark:border-slate-700 dark:bg-slate-900/90">
               <div className="font-display text-lg font-bold text-gradient">2+ yr</div>
-              <div className="text-xs text-slate-500 dark:text-slate-400">AI/ML experience</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400">Hands-on AI/ML experience</div>
             </div>
           </div>
         </motion.div>

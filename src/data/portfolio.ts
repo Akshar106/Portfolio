@@ -12,7 +12,7 @@ export const profile = {
   // Short roles cycled in the hero typewriter effect
   roles: ['AI/ML Engineer', 'Data Science Enthusiast'],
   tagline:
-    "I build LLM agents, RAG pipelines, and ML systems that ship to production. MS Data Science student at Indiana University (4.0 GPA), currently an AI Engineering Intern at Hitachi Global Air Power.",
+    "I build LLM agents, RAG pipelines, and ML systems that ship to production. MS Data Science student at Indiana University (4.0 GPA), currently an AI Engineering Intern at Hitachi (HGAP).",
   location: 'Bloomington, IN, USA',
   email: 'patelakshar1104@gmail.com',
   phone: '+1 (224) 224-1987',
@@ -32,13 +32,13 @@ export const about = {
   // 2–3 short paragraphs. Keep it human and specific.
   paragraphs: [
     "I'm an AI/ML engineer and MS Data Science student at Indiana University Bloomington (4.0 GPA), focused on large language models, multi-agent systems, RAG, and applied deep learning — and on shipping them where they create real value.",
-    "Right now I'm an AI Engineering Intern at Hitachi Global Air Power, building an enterprise Copilot Studio agent deployed to Microsoft Teams. Alongside that I work as a Research Assistant and ML Engineer at IU, with prior roles building production RAG systems and ML pipelines at Business Optima and Scale Capacity.",
+    "Right now I'm an AI Engineering Intern at Hitachi Global Air Power, architecting a multi-agent Copilot Studio assistant that orchestrates 5 RAG agents over governed Snowflake data via MCP, deployed to Microsoft Teams for 60+ users. Alongside that I work as an ML Engineer and Research Assistant at IU — building the query router behind One.IU and a Canvas-integrated LLM autograder — with prior roles building production RAG systems and ML pipelines at Business Optima and Scale Capacity.",
     "I care about clean experiments, reproducible pipelines, and writing code other people can build on. Outside of work I enjoy reading ML papers and exploring how agents can make everyday tools smarter.",
   ],
   // Quick facts shown as a small stat row
   stats: [
     { label: 'MS GPA', value: '4.0' },
-    { label: 'Years in AI/ML', value: '2+' },
+    { label: 'Hands-on AI/ML (yrs)', value: '2+' },
     { label: 'AI/ML roles held', value: '5' },
   ],
 };
@@ -54,23 +54,28 @@ export const skills: { category: string; items: string[] }[] = [
     items: [
       'RAG',
       'Multi-agent orchestration',
+      'MCP (Model Context Protocol)',
       'LoRA fine-tuning',
-      'Few-shot prompting',
+      'LLM evaluation',
       'Copilot Studio',
       'n8n',
     ],
   },
   {
     category: 'Databases & Vector Stores',
-    items: ['PostgreSQL', 'MySQL', 'MongoDB', 'FAISS', 'Pinecone'],
+    items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Snowflake', 'FAISS', 'Pinecone'],
+  },
+  {
+    category: 'Frameworks & APIs',
+    items: ['FastAPI', 'Flask', 'REST APIs', 'LangChain'],
   },
   {
     category: 'Cloud & DevOps',
-    items: ['AWS (EC2, S3, ECR)', 'Docker', 'Git', 'GitHub Actions', 'Power Automate'],
+    items: ['AWS (EC2, S3, ECR)', 'Microsoft Azure', 'Docker', 'Git', 'GitHub Actions', 'Power Automate'],
   },
   {
     category: 'Data & Visualization',
-    items: ['NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'Plotly', 'Streamlit'],
+    items: ['NumPy', 'Pandas', 'PySpark', 'Matplotlib', 'Seaborn', 'Plotly', 'Streamlit'],
   },
 ];
 
@@ -91,14 +96,13 @@ export const experience: Experience[] = [
     period: 'May 2026 — Present',
     type: 'Internship',
     description:
-      'Building an enterprise AI assistant deployed to Microsoft Teams so employees across the organization can self-serve accurate, source-backed answers.',
+      'Architecting a multi-agent enterprise AI assistant deployed on Microsoft Teams, grounded on governed Snowflake data via MCP, replacing manual document search for 60+ users.',
     highlights: [
-      "Built a conversational agent in Microsoft Copilot Studio grounded on the company's SharePoint document directory for accurate, citation-backed responses.",
-      'Designed Power Automate flows that capture and log "no information found" queries to a SharePoint list, creating a feedback loop for subject-matter experts (SMEs).',
-      'Established an auto-sync knowledge pipeline: SMEs validate and add approved docs to the SharePoint source, so the agent self-improves and correctly answers previously-unanswered questions.',
-      'Deployed the agent to Microsoft Teams for easy, org-wide access.',
+      'Architected a multi-agent AI assistant in Microsoft Copilot Studio that replaced manual document search, orchestrating 5 RAG agents via a supervisor-worker pattern with guardrails; deployed on Teams to 60 users across 5 departments.',
+      'Integrated Snowflake through a managed MCP (Model Context Protocol) server, exposing Cortex Search and Cortex Analyst as agent tools for governed, real-time retrieval over structured and unstructured data.',
+      'Built a human-in-the-loop escalation pipeline in Power Automate, routing unanswered queries to subject-matter experts through Teams adaptive cards and SharePoint with automated email notifications, resolving 50+ queries at a 3-hour average turnaround.',
     ],
-    tech: ['Copilot Studio', 'Power Automate', 'SharePoint', 'Microsoft Teams', 'RAG'],
+    tech: ['Copilot Studio', 'Multi-Agent Systems', 'Snowflake', 'MCP', 'Power Automate', 'Microsoft Teams'],
   },
   {
     role: 'Research Assistant',
@@ -121,13 +125,14 @@ export const experience: Experience[] = [
     period: 'Oct 2025 — Present',
     type: 'Part-time',
     description:
-      'Building LLM-powered routing and auto-grading systems for academic workflows.',
+      'Building LLM-powered routing and auto-grading systems that power Indiana University\'s student-facing AI tools.',
     highlights: [
-      'Designed a multi-agent routing layer using cosine similarity over normalized embeddings, rule-based constraints, and keyword parsing — 91% routing accuracy across 70+ validation scenarios.',
-      'Cut end-to-end query latency to 350ms by precomputing embedding matrices and adding a similarity-threshold fallback strategy.',
-      'Spearheaded an LLM-based auto-grading system via structured n8n workflows, processing 500–600 submissions/week and reducing grading time by 15 hours/week.',
+      "Engineered a query-routing system for Indiana University's One.IU portal, mapping user queries to a closed catalog of 33 applications at 98.6% accuracy, eliminating hallucinated routes by design.",
+      'Implemented a hybrid routing pipeline combining embedding search (all-MiniLM-L6-v2), fuzzy matching, and an LLM tiebreaker, reducing inference cost through a 3-stage validation cascade.',
+      'Deployed a REST API on Azure App Service that fetches and serves live IU dining data; adopted by the ChatAIU team as an agent tool, closing a live-data gap in the university\'s AI assistant.',
+      'Developed a Flask-based LLM autograding platform integrated with Canvas LMS via OAuth2, automatically retrieving submissions and grading against faculty rubrics using a schema-validated LLM agent with faculty review before Excel export.',
     ],
-    tech: ['Python', 'LLMs', 'Embeddings', 'n8n', 'Multi-agent'],
+    tech: ['Python', 'Embeddings', 'Azure App Service', 'Flask', 'Canvas LMS', 'LLM Agents'],
   },
   {
     role: 'AI Developer',
@@ -152,11 +157,11 @@ export const experience: Experience[] = [
     description:
       'Built an NLP spam-detection system and ran large-scale exploratory data analysis.',
     highlights: [
-      'Built an end-to-end spam detection system using NLP preprocessing and TF-IDF backed by PostgreSQL — 97% precision and 94% recall on unstructured email/SMS data.',
-      'Conducted statistical EDA on 50K+ data points with SQL, Pandas, NumPy, Matplotlib, and Seaborn to analyze class imbalance and text anomalies.',
-      'Trained and benchmarked 5+ classifiers (Naive Bayes, SVM, Logistic Regression, Random Forest), selecting the final model on precision–recall trade-offs.',
+      'Benchmarked Naive Bayes, Logistic Regression, SVM, Random Forest, and ensemble classifiers on 50K+ TF-IDF-vectorized records for spam detection, achieving 97% precision and 96% recall on imbalanced data.',
+      'Conducted statistical EDA on 50K+ data points with SQL, Pandas, PySpark, Matplotlib, and Seaborn to analyze class imbalance and text anomalies.',
+      'Selected the final model on precision–recall trade-offs after benchmarking across 5+ classifier families on unstructured email/SMS data.',
     ],
-    tech: ['Python', 'NLP', 'TF-IDF', 'PostgreSQL', 'scikit-learn'],
+    tech: ['Python', 'NLP', 'TF-IDF', 'PySpark', 'PostgreSQL', 'scikit-learn'],
   },
 ];
 
@@ -171,12 +176,20 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: 'EduPilot — Multi-Agent Educational AI',
+    title: 'EduPilot — Multi-Agent, Source-Grounded RAG System',
     description:
-      'A source-grounded, multi-agent tutoring system that answers graduate-course questions with mandatory citations and near-zero hallucination. A 7-stage pipeline — router → query splitter → hybrid retriever (Pinecone + BM25 via Reciprocal Rank Fusion) → cross-encoder reranker → per-domain agents → synthesizer → two-pass verifier — delivers 100% intent/routing/citation accuracy, cross-domain synthesis, out-of-domain rejection, and a 4.6× token-efficiency gain.',
-    tags: ['Multi-Agent', 'RAG', 'Hybrid Search', 'Reranking', 'Pinecone', 'FastAPI'],
+      'A 7-stage multi-agent RAG pipeline (FastAPI, Pinecone, Groq Llama 3.3 70B) with hybrid semantic and BM25 retrieval fused via Reciprocal Rank Fusion, inline source citations, and LLM-as-judge verification. Evaluated with a 50-case, 8-metric suite spanning faithfulness, citation accuracy, and adversarial hallucination tests — quantifying a 3.7× citation-accuracy gap between 70B and 8B models.',
+    tags: ['Multi-Agent', 'RAG', 'Hybrid Search', 'Reranking', 'Pinecone', 'FastAPI', 'Groq Llama 3.3 70B'],
     github:
       'https://github.com/Akshar106/EduPilot-A-Multi-Agent-Source-Grounded-Educational-AI-System-for-Adaptive-and-Cross-Domain-Learning',
+    featured: true,
+  },
+  {
+    title: 'IntelliSphere — Domain-Specific RAG Conversational AI',
+    description:
+      'A domain-specific RAG assistant for healthcare and legal document QA (Flask, LangChain, FAISS, Gemini) with recursive chunking, metadata-tagged indexing, and MongoDB-backed multi-session conversation memory. Containerized with Docker and shipped via GitHub Actions CI/CD, building images to Amazon ECR and auto-deploying to EC2 through a self-hosted runner, with FAISS indexes synced from S3 at startup.',
+    tags: ['RAG', 'LangChain', 'FAISS', 'Gemini', 'Flask', 'MongoDB', 'Docker', 'CI/CD'],
+    github: 'https://github.com/Akshar106/IntelliSphere-Domain-Specific-RAG-Conversational-AI-',
     featured: true,
   },
   {
